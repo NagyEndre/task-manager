@@ -10,10 +10,16 @@
         <button type="submit">ADD</button>
       </form>
       <p v-if="tasks.length === 0">
-        No todos have been added yet. Please start adding some.
+        No todos have been added yet. Please start adding one.
       </p>
-      <ul>
-        <li v-for="task in tasks" :key="task">{{ task }}</li>
+      <ul v-else>
+        <li
+          v-for="(task, index) in tasks"
+          :key="index"
+          @click="removeTask(index)"
+        >
+          {{ task }}
+        </li>
       </ul>
     </section>
   </div>
@@ -32,6 +38,9 @@ export default class App extends Vue {
       this.tasks.unshift(this.currentTask);
       this.currentTask = null;
     }
+  }
+  removeTask(index: number): void {
+    this.tasks.splice(index, 1);
   }
 }
 </script>
