@@ -5,10 +5,10 @@
     </header>
     <section class="container">
       <h2>Today's TODOs</h2>
-      <div id="controlls">
-        <input type="text" name="" id="" />
-        <button>ADD</button>
-      </div>
+      <form id="controlls" @submit.prevent="addTask">
+        <input type="text" name="" id="" v-model.trim="currentTask" />
+        <button type="submit">ADD</button>
+      </form>
       <p v-if="tasks.length === 0">
         No todos have been added yet. Please start adding some.
       </p>
@@ -24,7 +24,15 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class App extends Vue {
-  tasks = ["First todo", "Second todo"];
+  tasks: string[] = [];
+  currentTask: null | string = null;
+
+  addTask(): void {
+    if (this.currentTask) {
+      this.tasks.unshift(this.currentTask);
+      this.currentTask = null;
+    }
+  }
 }
 </script>
 
