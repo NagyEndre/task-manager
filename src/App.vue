@@ -5,15 +5,15 @@
     </header>
     <section class="container">
       <h2>Today's TODOs</h2>
-      <div>
+      <div id="controlls">
         <input type="text" name="" id="" />
-        <button>Add</button>
+        <button>ADD</button>
       </div>
       <p v-if="tasks.length === 0">
         No todos have been added yet. Please start adding some.
       </p>
       <ul>
-        <li>first todo</li>
+        <li v-for="task in tasks" :key="task">{{ task }}</li>
       </ul>
     </section>
   </div>
@@ -24,7 +24,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class App extends Vue {
-  tasks = [];
+  tasks = ["First todo", "Second todo"];
 }
 </script>
 
@@ -44,7 +44,7 @@ body {
   margin-top: 60px;
 }
 header {
-  background-color: green;
+  background-color: darkgreen;
   color: white;
   padding: 1rem;
 }
@@ -55,21 +55,34 @@ header {
   border-radius: 1rem;
   padding: 1rem;
 }
+#controlls {
+  height: 2rem;
+}
 section {
   background-color: white;
 }
 button {
-  background-color: deepskyblue;
+  background-color: steelblue;
   color: white;
   cursor: pointer;
   padding: 0.05rem 1rem;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+  height: 100%;
+  width: 10%;
 }
 li {
   list-style: none;
+  background-color: green;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1.5rem;
 }
 input {
   border: 1px solid #ccc;
   font: inherit;
+  height: 100%;
+  width: 70%;
 }
 </style>
