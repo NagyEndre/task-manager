@@ -4,15 +4,15 @@
       <h1>Task Manager</h1>
     </header>
     <section class="container">
-      <h2>Today's TODOs</h2>
+      <h2>Today's tasks</h2>
       <form id="controlls" @submit.prevent="addTask">
         <input type="text" name="" id="" v-model.trim="currentTask" />
-        <button type="submit" class="btn-primary">ADD</button>
+        <button type="submit" class="btn-primary">Add</button>
       </form>
       <p v-if="tasks.length === 0">
-        No todos have been added yet. Start adding one.
+        No tasks have been added yet. Start adding one.
       </p>
-      <ul v-else>
+      <ul v-show="showList">
         <li v-for="(task, index) in tasks" :key="index">
           {{ task }}
           <img
@@ -22,6 +22,13 @@
           />
         </li>
       </ul>
+      <button
+        v-if="tasks.length > 0"
+        @click="toggleListDisplay"
+        class="btn-primary"
+      >
+        <span v-if="showList">Hide</span><span v-else>Show</span> List
+      </button>
     </section>
   </div>
 </template>
@@ -33,6 +40,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class App extends Vue {
   tasks: string[] = [];
   currentTask: null | string = null;
+  showList = true;
 
   addTask(): void {
     if (this.currentTask) {
@@ -42,6 +50,9 @@ export default class App extends Vue {
   }
   removeTask(index: number): void {
     this.tasks.splice(index, 1);
+  }
+  toggleListDisplay() {
+    this.showList = !this.showList;
   }
 }
 </script>
@@ -85,10 +96,9 @@ section {
   background-color: steelblue;
   color: white;
   cursor: pointer;
-  padding: 0.05rem 1rem;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
-  height: 100%;
-  width: 10%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
 .x-circle-fill {
   height: 1.3rem;
