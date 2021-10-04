@@ -12,7 +12,7 @@
       <p v-if="tasks.length === 0">
         No tasks have been added yet. Start adding one.
       </p>
-      <ul v-show="showList">
+      <ul v-show="isListVisible">
         <li v-for="(task, index) in tasks" :key="index">
           {{ task }}
           <img
@@ -27,7 +27,7 @@
         @click="toggleListDisplay"
         class="btn-primary"
       >
-        <span v-if="showList">Hide</span><span v-else>Show</span> List
+        <span v-if="isListVisible">Hide</span><span v-else>Show</span> List
       </button>
     </section>
   </div>
@@ -40,7 +40,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class App extends Vue {
   tasks: string[] = [];
   currentTask: null | string = null;
-  showList = true;
+  isListVisible = true;
 
   addTask(): void {
     if (this.currentTask) {
@@ -52,7 +52,7 @@ export default class App extends Vue {
     this.tasks.splice(index, 1);
   }
   toggleListDisplay() {
-    this.showList = !this.showList;
+    this.isListVisible = !this.isListVisible;
   }
 }
 </script>
