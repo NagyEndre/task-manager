@@ -7,18 +7,19 @@
       <h2>Today's TODOs</h2>
       <form id="controlls" @submit.prevent="addTask">
         <input type="text" name="" id="" v-model.trim="currentTask" />
-        <button type="submit">ADD</button>
+        <button type="submit" class="btn-primary">ADD</button>
       </form>
       <p v-if="tasks.length === 0">
-        No todos have been added yet. Please start adding one.
+        No todos have been added yet. Start adding one.
       </p>
       <ul v-else>
-        <li
-          v-for="(task, index) in tasks"
-          :key="index"
-          @click="removeTask(index)"
-        >
+        <li v-for="(task, index) in tasks" :key="index">
           {{ task }}
+          <img
+            src="..\src\assets\x-circle-fill.svg"
+            class="x-circle-fill"
+            @click="removeTask(index)"
+          />
         </li>
       </ul>
     </section>
@@ -74,11 +75,13 @@ header {
 }
 #controlls {
   height: 2rem;
+  margin-bottom: 2rem;
 }
 section {
   background-color: white;
 }
-button {
+.btn-primary {
+  font-size: 1rem;
   background-color: steelblue;
   color: white;
   cursor: pointer;
@@ -86,6 +89,13 @@ button {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
   height: 100%;
   width: 10%;
+}
+.x-circle-fill {
+  height: 1.3rem;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0.8rem;
 }
 li {
   list-style: none;
@@ -95,6 +105,7 @@ li {
   border-radius: 1rem;
   color: white;
   font-size: 1.5rem;
+  position: relative;
 }
 input {
   border: 1px solid #ccc;
