@@ -37,23 +37,16 @@ dialog {
   width: 100%;
   z-index: 999;
 }
+.shade-leave-to,
 .shade-enter {
   opacity: 0;
 }
+.shade-leave-active,
 .shade-enter-active {
   transition: opacity 0.2s ease-out;
 }
+.shade-leave,
 .shade-enter-to {
   opacity: 1;
-}
-
-.shade-leave {
-  opacity: 1;
-}
-.shade-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-.shade-leave-to {
-  opacity: 0;
 }
 </style>
