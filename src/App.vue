@@ -30,13 +30,11 @@
         <span v-if="isListVisible">Hide</span><span v-else>Show</span> List
       </button>
     </section>
-    <transition name="shade">
-      <PopupDialog v-if="error">
-        <h2>Invalid task</h2>
-        <p>Task title must not be empty!</p>
-        <button @click="acknowledgeError">OK</button>
-      </PopupDialog>
-    </transition>
+    <PopupDialog :open="error">
+      <h2>Invalid task</h2>
+      <p>Task title must not be empty!</p>
+      <button @click="acknowledgeError">OK</button>
+    </PopupDialog>
   </div>
 </template>
 
@@ -137,23 +135,5 @@ input {
   height: 100%;
   width: 70%;
 }
-.shade-enter {
-  opacity: 0;
-}
-.shade-enter-active {
-  transition: opacity 0.2s ease-out;
-}
-.shade-enter-to {
-  opacity: 1;
-}
 
-.shade-leave {
-  opacity: 1;
-}
-.shade-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-.shade-leave-to {
-  opacity: 0;
-}
 </style>

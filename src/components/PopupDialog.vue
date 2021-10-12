@@ -1,16 +1,20 @@
 <template>
-  <div id="shade">
-    <dialog open>
-      <slot></slot>
-    </dialog>
-  </div>
+  <transition name="shade">
+    <div id="shade" v-if="open">
+      <dialog open>
+        <slot></slot>
+      </dialog>
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class PopupDialog extends Vue {}
+export default class PopupDialog extends Vue {
+  @Prop(Boolean) open!: boolean;
+}
 </script>
 
 <style scoped>
@@ -32,5 +36,24 @@ dialog {
   height: 100%;
   width: 100%;
   z-index: 999;
+}
+.shade-enter {
+  opacity: 0;
+}
+.shade-enter-active {
+  transition: opacity 0.2s ease-out;
+}
+.shade-enter-to {
+  opacity: 1;
+}
+
+.shade-leave {
+  opacity: 1;
+}
+.shade-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+.shade-leave-to {
+  opacity: 0;
 }
 </style>
