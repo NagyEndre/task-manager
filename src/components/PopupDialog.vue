@@ -1,6 +1,5 @@
 <template>
   <div id="shade">
-    asdf
     <dialog open>
       <slot></slot>
     </dialog>
