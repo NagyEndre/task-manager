@@ -30,22 +30,32 @@
         <span v-if="isListVisible">Hide</span><span v-else>Show</span> List
       </button>
     </section>
+    <PopupDialog v-if="error">
+      <h2>Invalid task</h2>
+      <p>Task title must not be empty!</p>
+      <button @click="acknowledgeError">OK</button>
+    </PopupDialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import PopupDialog from "./components/PopupDialog.vue";
 
-@Component
+@Component({ components: { PopupDialog } })
 export default class App extends Vue {
   tasks: string[] = [];
   currentTask: null | string = null;
   isListVisible = true;
+  error = false;
 
   addTask(): void {
     if (this.currentTask) {
       this.tasks.unshift(this.currentTask);
       this.currentTask = null;
+    } else {
+      this.error = true;
+      console.log("task must not be empty.");
     }
   }
   removeTask(index: number): void {
@@ -53,6 +63,9 @@ export default class App extends Vue {
   }
   toggleListDisplay() {
     this.isListVisible = !this.isListVisible;
+  }
+  acknowledgeError() {
+    this.error = false;
   }
 }
 </script>
