@@ -1,7 +1,10 @@
 <template>
-  <dialog open>
-    <slot></slot>
-  </dialog>
+  <div id="shade">
+    asdf
+    <dialog open>
+      <slot></slot>
+    </dialog>
+  </div>
 </template>
 
 <script lang="ts">
@@ -20,5 +23,15 @@ dialog {
   top: 20vh;
   left: 30%;
   width: 40%;
+  border-radius: 0.5rem;
+}
+#shade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: 999;
 }
 </style>
