@@ -12,7 +12,12 @@
       <p v-if="tasks.length === 0">
         No tasks have been added yet. Start adding one.
       </p>
-      <ul v-show="isListVisible">
+      <transition-group
+        tag="ul"
+        name="todo-list"
+        v-show="isListVisible"
+        @after-leave="console.log('after-leave')"
+      >
         <li v-for="(task, index) in tasks" :key="index">
           {{ task }}
           <img
@@ -21,7 +26,7 @@
             @click="removeTask(index)"
           />
         </li>
-      </ul>
+      </transition-group>
       <button
         v-if="tasks.length > 0"
         @click="toggleListDisplay"
@@ -51,7 +56,7 @@ export default class App extends Vue {
 
   addTask(): void {
     if (this.currentTask) {
-      this.tasks.unshift(this.currentTask);
+      this.tasks.push(this.currentTask);
       this.currentTask = null;
     } else {
       this.error = true;
@@ -136,4 +141,20 @@ input {
   width: 70%;
 }
 
+.todo-list-enter {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.todo-list-leave-active,
+.todo-list-enter-active {
+  transition: all 0.3s ease-out;
+}
+.todo-list-leave .todo-list-enter-to {
+  opacity: 1;
+  transform: translate(0);
+}
+.todo-list-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
+}
 </style>
