@@ -12,12 +12,7 @@
       <p v-if="tasks.length === 0">
         No tasks have been added yet. Start adding one.
       </p>
-      <transition-group
-        tag="ul"
-        name="todo-list"
-        v-show="isListVisible"
-        @after-leave="console.log('after-leave')"
-      >
+      <transition-group tag="ul" name="todo-list" v-show="isListVisible">
         <li v-for="(task, index) in tasks" :key="index">
           {{ task }}
           <img
